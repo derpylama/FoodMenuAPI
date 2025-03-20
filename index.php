@@ -48,8 +48,5 @@ $vegetariska_ratter = [
     "Broccolipaj", "Vegetarisk bourguignon", "Bakad sötpotatis med fetaost"
 ];
 
-?>
 
-
-
-?>
+// skickar in en vecka. kollar om det veckan redan är generad och finns i filen redan annars generas en ny för den veckan och skrivs ner i filen och sedan skicas tillbaka som resultat
