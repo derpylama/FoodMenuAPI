@@ -1,0 +1,1 @@
+{["1":{"menu":["Fiskgratäng","Ankbröst med balsamicosås","Pulled pork","Kantarelltoast med parmaskinka","Coq au vin"],"vegeterianMenu":["Tofuwok med grönsaker","Bulgursallad","Grillad portobellosvamp","Böngryta","Broccolisoppa"]}]}

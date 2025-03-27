@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: application/json; charset=utf-8");
 $vanliga_ratter = [
     "Köttbullar med potatismos", "Lasagne", "Pannbiff med lök", "Spaghetti Bolognese", "Kycklinggryta",
     "Fläskkotlett med gräddsås", "Fiskgratäng", "Oxfilé med bearnaisesås", "Grillad lax med hollandaisesås", "Kebabtallrik",
@@ -50,3 +50,64 @@ $vegetariska_ratter = [
 
 
 // skickar in en vecka. kollar om det veckan redan är generad och finns i filen redan annars generas en ny för den veckan och skrivs ner i filen och sedan skicas tillbaka som resultat
+
+CheckIfWeekisGenerated(1);
+
+//{1:{monday:{food1, food2}}}
+
+
+function CheckIfWeekisGenerated(int $week){
+
+    try
+    {
+        $weekList = file_get_contents("weeklist.json");
+        
+        $menu = json_decode($weekList, true);
+        if(isset($menu[$week]))
+        {
+            print_r($menu[$week], true);
+        }
+        else
+        {
+            GenerateWeek($week);
+        }
+    }
+    catch(Exception $e)
+    {
+        GenerateWeek($week);
+    }
+    
+}
+
+function GenerateWeek(int $week){
+    global $vanliga_ratter, $vegetariska_ratter;
+    $menu = [];
+    $vegertartianMenu = [];
+    for ($i=0; $i < 5; $i++) { 
+        $randInt = random_int(0,80);
+        $menu[$i] = $vanliga_ratter[$randInt];
+        $vegertartianMenu[$i] = $vegetariska_ratter[$randInt];
+    }
+    $weekMenu["menu"] = $menu;
+    $weekMenu["vegeterianMenu"] = $vegertartianMenu;
+
+    $finalMenu[$week] = $weekMenu;
+    
+    $currentWeekListFile = file_get_contents("weeklist.json");
+    $file = fopen("weeklist.json", "w");
+
+    $currentWeekList = json_decode($currentWeekListFile, true);
+
+    if($currentWeekList != null)
+    {
+        $responseArray = array_merge($finalMenu, $currentWeekList);
+    }
+    else
+    {
+        $responseArray = $finalMenu;
+    }
+    
+    fwrite($file, json_encode($responseArray, JSON_UNESCAPED_UNICODE));
+    fclose($file);
+
+}
