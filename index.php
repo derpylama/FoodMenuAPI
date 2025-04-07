@@ -53,8 +53,6 @@ $vegetariska_ratter = [
 
 CheckIfWeekisGenerated(1);
 
-//{1:{monday:{food1, food2}}}
-
 
 function CheckIfWeekisGenerated(int $week){
 
@@ -63,14 +61,22 @@ function CheckIfWeekisGenerated(int $week){
         $weekList = file_get_contents("weeklist.json");
         
         $menu = json_decode($weekList, true);
-        if(isset($menu[$week]))
+        if($menu != "")
         {
-            print_r($menu[$week], true);
-        }
-        else
+
+            if($menu["weekNr"] == $week)
+            {
+                echo "found";
+            }
+            else
+            {
+                GenerateWeek($week);
+            }
+        }   
+        else 
         {
             GenerateWeek($week);
-        }
+        } 
     }
     catch(Exception $e)
     {
@@ -83,6 +89,9 @@ function GenerateWeek(int $week){
     global $vanliga_ratter, $vegetariska_ratter;
     $menu = [];
     $vegertartianMenu = [];
+    $responseArray = [];
+
+
     for ($i=0; $i < 5; $i++) { 
         $randInt = random_int(0,80);
         $menu[$i] = $vanliga_ratter[$randInt];
@@ -91,16 +100,22 @@ function GenerateWeek(int $week){
     $weekMenu["menu"] = $menu;
     $weekMenu["vegeterianMenu"] = $vegertartianMenu;
 
-    $finalMenu[$week] = $weekMenu;
-    
+    $finalMenu["$week"] = $weekMenu;
+    //$finalMenu += $weekMenu;
+
     $currentWeekListFile = file_get_contents("weeklist.json");
     $file = fopen("weeklist.json", "w");
-
+    
     $currentWeekList = json_decode($currentWeekListFile, true);
 
     if($currentWeekList != null)
     {
-        $responseArray = array_merge($finalMenu, $currentWeekList);
+        //$responseArray = $finalMenu + $currentWeekList;
+        //$responseArray = array_merge( $finalMenu, $currentWeekList);
+        print_r($responseArray);
+
+        $responseArray += $finalMenu;
+        $responseArray += $currentWeekList;
     }
     else
     {
@@ -109,5 +124,4 @@ function GenerateWeek(int $week){
     
     fwrite($file, json_encode($responseArray, JSON_UNESCAPED_UNICODE));
     fclose($file);
-
 }
