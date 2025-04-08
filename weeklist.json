@@ -1,1 +1,22 @@
-{"1":{"menu":["Köttfärslimpa","Kantarelltoast med parmaskinka","Sill och potatis","Ramen med fläsk och ägg","Hamburgare"],"vegeterianMenu":["Vegetarisk bolognese","Böngryta","Kikärtsbiffar","Rotsaksgratäng","Grönsaksgratäng"]},"2":{"menu":["Risotto med oxfilé","Kåldolmar","Chili con carne","Pasta puttanesca","Sill och potatis"],"vegeterianMenu":["Miso soppa","Rödbetsbiffar","Vegetariska tacos","Tofu satay","Kikärtsbiffar"]}}
+{
+    "51": {
+        "menu": ["Moules frites", "Rödspätta med remouladsås", "Korv stroganoff", "Surströmming med tunnbröd", "Rökt sik med pepparrotskräm"],
+        "vegeterianMenu": ["Vegetarisk frittata", "Spenat- och ricottapaj", "Vegetarisk gulasch", "Vegetarisk nasi goreng", "Tomat- och mozzarellasallad"]
+    },
+    "52": {
+        "menu": ["Gulaschsoppa", "Stekt entrecôte med potatisgratäng", "Pyttipanna", "Grillad lax med hollandaisesås", "Biff med bambuskott och ris"],
+        "vegeterianMenu": ["Vegetarisk pad thai", "Vegetarisk gnocchi", "Vegetarisk ramen", "Auberginegratäng", "Fyllda champinjoner"]
+    },
+    "4": {
+        "menu": ["Biff med bambuskott och ris", "Chili con carne", "Fläskkotlett med gräddsås", "Köttbullar med potatismos", "Sjömansbiff"],
+        "vegeterianMenu": ["Fyllda champinjoner", "Vegetariska tacos", "Vegetarisk chili", "Vegetarisk lasagne", "Vegetarisk burrito"]
+    },
+    "1": {
+        "menu": ["Köttfärslimpa", "Kantarelltoast med parmaskinka", "Sill och potatis", "Ramen med fläsk och ägg", "Hamburgare"],
+        "vegeterianMenu": ["Vegetarisk bolognese", "Böngryta", "Kikärtsbiffar", "Rotsaksgratäng", "Grönsaksgratäng"]
+    },
+    "2": {
+        "menu": ["Risotto med oxfilé", "Kåldolmar", "Chili con carne", "Pasta puttanesca", "Sill och potatis"],
+        "vegeterianMenu": ["Miso soppa", "Rödbetsbiffar", "Vegetariska tacos", "Tofu satay", "Kikärtsbiffar"]
+    }
+}
