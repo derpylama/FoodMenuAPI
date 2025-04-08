@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentation</title>
+    <link rel="stylesheet" href="Dokumentaiton.css">
+</head>
+<body>
+    <header>
+        <h1>Dokumentation</h1>
+    </header>
+     
+    <div id="rectangle">
+        <div id="text">
+        <p>Skicka till /index.php?week=weeknr</p>
+        <p>weeknr = det vecko nummer som du vill få menu till.</p>
+        <p>veckan kan max vara 52 och minst 1</p>
+        <p>formatet som datan skickas tillbaka</p>
+        <p>exempel:/index.php?week=2</p>
+        <p>"2": { "menu": ["Risotto med oxfilé", "Kåldolmar", "Chili con carne", "Pasta puttanesca", "Sill och potatis"],"vegeterianMenu": ["Miso soppa", "Rödbetsbiffar", "Vegetariska tacos", "Tofu satay", "Kikärtsbiffar"]}</p>
+        <p>Där menu innehåller de fem olika maträtter som serveras för alla vardagar. (mån-fre) för att komma åt menu skriv "data["menu"]" får du tag på en array med vilka maträtter som är den listan. </p>
+        <p>För att få en specifik dag välj ut den ur listan som du får för hela veckan.</p>
+        </div>
+    </div>
+    
+    <canvas id="FoodMenuAPI" width="800" height="200"></canvas>
+
+</body>
+</html>
