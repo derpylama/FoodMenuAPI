@@ -63,10 +63,9 @@ function CheckIfWeekisGenerated(int $week){
         $menu = json_decode($weekList, true);
         if($menu != "")
         {
-
-            if($menu["weekNr"] == $week)
+            if(isset($menu[$week]))
             {
-                echo "found";
+                echo json_encode($menu[$week], JSON_UNESCAPED_UNICODE);
             }
             else
             {
@@ -112,7 +111,6 @@ function GenerateWeek(int $week){
     {
         //$responseArray = $finalMenu + $currentWeekList;
         //$responseArray = array_merge( $finalMenu, $currentWeekList);
-        print_r($responseArray);
 
         $responseArray += $finalMenu;
         $responseArray += $currentWeekList;
