@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: application/json; charset=utf-8");
 $vanliga_ratter = [
     "Köttbullar med potatismos", "Lasagne", "Pannbiff med lök", "Spaghetti Bolognese", "Kycklinggryta",
     "Fläskkotlett med gräddsås", "Fiskgratäng", "Oxfilé med bearnaisesås", "Grillad lax med hollandaisesås", "Kebabtallrik",
@@ -50,3 +50,76 @@ $vegetariska_ratter = [
 
 
 // skickar in en vecka. kollar om det veckan redan är generad och finns i filen redan annars generas en ny för den veckan och skrivs ner i filen och sedan skicas tillbaka som resultat
+
+CheckIfWeekisGenerated(1);
+
+
+function CheckIfWeekisGenerated(int $week){
+
+    try
+    {
+        $weekList = file_get_contents("weeklist.json");
+        
+        $menu = json_decode($weekList, true);
+        if($menu != "")
+        {
+            if(isset($menu[$week]))
+            {
+                echo json_encode($menu[$week], JSON_UNESCAPED_UNICODE);
+            }
+            else
+            {
+                GenerateWeek($week);
+            }
+        }   
+        else 
+        {
+            GenerateWeek($week);
+        } 
+    }
+    catch(Exception $e)
+    {
+        GenerateWeek($week);
+    }
+    
+}
+
+function GenerateWeek(int $week){
+    global $vanliga_ratter, $vegetariska_ratter;
+    $menu = [];
+    $vegertartianMenu = [];
+    $responseArray = [];
+
+
+    for ($i=0; $i < 5; $i++) { 
+        $randInt = random_int(0,80);
+        $menu[$i] = $vanliga_ratter[$randInt];
+        $vegertartianMenu[$i] = $vegetariska_ratter[$randInt];
+    }
+    $weekMenu["menu"] = $menu;
+    $weekMenu["vegeterianMenu"] = $vegertartianMenu;
+
+    $finalMenu["$week"] = $weekMenu;
+    //$finalMenu += $weekMenu;
+
+    $currentWeekListFile = file_get_contents("weeklist.json");
+    $file = fopen("weeklist.json", "w");
+    
+    $currentWeekList = json_decode($currentWeekListFile, true);
+
+    if($currentWeekList != null)
+    {
+        //$responseArray = $finalMenu + $currentWeekList;
+        //$responseArray = array_merge( $finalMenu, $currentWeekList);
+
+        $responseArray += $finalMenu;
+        $responseArray += $currentWeekList;
+    }
+    else
+    {
+        $responseArray = $finalMenu;
+    }
+    
+    fwrite($file, json_encode($responseArray, JSON_UNESCAPED_UNICODE));
+    fclose($file);
+}
