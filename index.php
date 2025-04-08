@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: application/json");
 
 $vanliga_ratter = [
     "Köttbullar med potatismos", "Lasagne", "Pannbiff med lök", "Spaghetti Bolognese", "Kycklinggryta",
@@ -48,8 +49,24 @@ $vegetariska_ratter = [
     "Broccolipaj", "Vegetarisk bourguignon", "Bakad sötpotatis med fetaost"
 ];
 
-?>
+$week = isset($_GET["vecka"]) ? (int)$_GET["vecka"] : 0;
+$day = isset($_GET["dag"]) ? (int)$_GET["dag"] : 0;
 
+if ($week > 0 && $week < 53 && $day > 0 && $day < 6) {
+    $meny = [];
+    $vegMeny = [];
 
+    for ($i = 0; $i < 5; $i++) {
+        $meny[] = $vanliga_ratter[random_int(0, count($vanliga_ratter) - 1)];
+        $vegMeny[] = $vegetariska_ratter[random_int(0, count($vegetariska_ratter) - 1)];
+    }
 
-?>
+    $arr = [
+        ['meny' => $meny],
+        ['vegMeny' => $vegMeny]
+    ];
+
+    echo json_encode($arr, JSON_PRETTY_PRINT);
+} else {
+    echo json_encode(["error" => "Ogiltig vecka eller dag. Vecka ska vara mellan 1-52 och dag mellan 1-5."], JSON_PRETTY_PRINT);
+}
